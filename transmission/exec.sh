@@ -1,4 +1,10 @@
 #!/bin/bash
+
+APP_NAME=transmission
+TAG=develop
+IMAGE=thomaschampagne/oci-$APP_NAME:$TAG
+PORT=9091
+
 cd "$(dirname "$0")" || exit
 
 # Init clear
@@ -13,12 +19,6 @@ fi
 if [[ "$1" = "-c" || "$1" = "--clear" ]]; then
   opt_clear=true
 fi
-
-# Variables
-APP_NAME=transmission
-TAG=develop
-IMAGE=thomaschampagne/oci-$APP_NAME:$TAG
-PORT=9091
 
 # Kill existing container if exists
 podman rm -f $APP_NAME

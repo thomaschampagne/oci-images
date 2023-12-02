@@ -1,9 +1,9 @@
 #!/bin/bash
 
-APP_NAME=mosquitto
+APP_NAME=homeassistant
 TAG=develop
 IMAGE=thomaschampagne/oci-$APP_NAME:$TAG
-PORT=1883
+PORT=8123
 
 cd "$(dirname "$0")" || exit
 
@@ -37,4 +37,4 @@ podman run -dit \
     -p $PORT:$PORT \
     $IMAGE
 
-echo -e "\nContainer running."
+echo -e "\nContainer running. Access app at: http://localhost:$PORT"
