@@ -1,0 +1,65 @@
+# Documentation: https://wsgidav.readthedocs.io/en/latest/user_guide_configure.html#sample-wsgidav-yaml
+
+server: cheroot
+
+# Server hostname (default: localhost, use --host on command line)
+host: 0.0.0.0
+
+# Server port (default: 8080, use --port on command line)
+port: 8080
+
+# ==============================================================================
+# SHARES
+provider_mapping:
+    "/realms/default": "/data/realms/default"
+
+# ==============================================================================
+# AUTHENTICATION
+
+http_authenticator:
+    #: Allow basic authentication
+    accept_basic: true
+    #: Allow digest authentication
+    accept_digest: true
+    #: true (default digest) or false (default basic)
+    default_to_digest: true
+    #: Header field that will be accepted as authorized user.
+    #: Including quotes, for example: trusted_auth_header = 'REMOTE_USER'
+    trusted_auth_header: null
+    #: Domain controller that is used to resolve realms and authorization.
+    #: Default null: which uses SimpleDomainController and the
+    #: `simple_dc.user_mapping` option below.
+    #: (See http://wsgidav.readthedocs.io/en/latest/user_guide_configure.html
+    #: for details.)
+    domain_controller: wsgidav.dc.simple_dc.SimpleDomainController
+    # domain_controller: wsgidav.dc.simple_dc.SimpleDomainController
+    # domain_controller: wsgidav.dc.pam_dc.PAMDomainController
+    # domain_controller: wsgidav.dc.nt_dc.NTDomainController
+
+# Additional options for SimpleDomainController only:
+simple_dc:
+    # Access control per share.
+    # These routes must match the provider mapping.
+    # NOTE: Provider routes without a matching entry here, are inaccessible.
+    user_mapping:
+        "*": # default (used for all shares that are not explicitly listed)
+            "admin":
+                password: "admin"
+        "/realms/default":
+            "user":
+                password: "user"
+
+# ==============================================================================
+# DEBUGGING
+
+#: Set verbosity level (can be overridden by -v or -q arguments)
+verbose: 3
+
+logging:
+    #: Enable logging when using wsgidav in library mode (always on, when running as CLI)
+    enable: true
+
+# ----------------------------------------------------------------------------
+# WsgiDavDirBrowser
+dir_browser:
+    enable: true
