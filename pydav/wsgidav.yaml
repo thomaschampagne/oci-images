@@ -8,10 +8,17 @@ host: 0.0.0.0
 # Server port (default: 8080, use --port on command line)
 port: 8080
 
-# ==============================================================================
-# SHARES
-provider_mapping:
-    "/realms/default": "/data/realms/default"
+# ----------------------------------------------------------------------------
+#: Modify to customize the WSGI application stack.
+#: See here for an example how to add custom middlewares:
+#:   https://wsgidav.readthedocs.io/en/latest/user_guide_configure.html#middleware-stack
+middleware_stack:
+    - wsgidav.mw.cors.Cors
+    # - wsgidav.mw.debug_filter.WsgiDavDebugFilter
+    - wsgidav.error_printer.ErrorPrinter
+    - wsgidav.http_authenticator.HTTPAuthenticator
+    - wsgidav.dir_browser.WsgiDavDirBrowser
+    - wsgidav.request_resolver.RequestResolver  # this must be the last middleware item
 
 # ==============================================================================
 # AUTHENTICATION
@@ -36,18 +43,13 @@ http_authenticator:
     # domain_controller: wsgidav.dc.pam_dc.PAMDomainController
     # domain_controller: wsgidav.dc.nt_dc.NTDomainController
 
-# Additional options for SimpleDomainController only:
-simple_dc:
-    # Access control per share.
-    # These routes must match the provider mapping.
-    # NOTE: Provider routes without a matching entry here, are inaccessible.
-    user_mapping:
-        "*": # default (used for all shares that are not explicitly listed)
-            "admin":
-                password: "admin"
-        "/realms/default":
-            "user":
-                password: "user"
+# ----------------------------------------------------------------------------
+# CORS
+# (Requires `wsgidav.mw.cors.Cors`, which is enabled by default.)
+cors:
+    #: List of allowed Origins or '*'
+    #: Default: false, i.e. prevent CORS
+    allow_origin: false
 
 # ==============================================================================
 # DEBUGGING
@@ -62,4 +64,22 @@ logging:
 # ----------------------------------------------------------------------------
 # WsgiDavDirBrowser
 dir_browser:
-    enable: true
+    enable: false
+
+# ==============================================================================
+# SHARES
+provider_mapping:
+    "/realms/default": "/data/realms/default"
+
+# Additional options for SimpleDomainController only:
+simple_dc:
+    # Access control per share.
+    # These routes must match the provider mapping.
+    # NOTE: Provider routes without a matching entry here, are inaccessible.
+    user_mapping:
+        "*": # default (used for all shares that are not explicitly listed)
+            "admin":
+                password: "admin"
+        "/realms/default":
+            "user":
+                password: "user"

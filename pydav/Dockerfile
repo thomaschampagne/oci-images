@@ -52,7 +52,7 @@ WORKDIR /app
 RUN apk --no-cache add python3 && \
     python -m venv venv && \
     source ./venv/bin/activate && \
-    python -m pip install --no-cache-dir cheroot wsgidav && \
+    python -m pip install --no-cache-dir cheroot lxml wsgidav && \
     pip cache purge
 
 # Create /data folder with default realm
