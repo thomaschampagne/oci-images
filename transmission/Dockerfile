@@ -45,7 +45,7 @@ ARG ALT_USER_ID=1000
 # Run upgrades
 RUN apk update && apk --no-cache upgrade && \
     # Create oci user
-    adduser ${ALT_USER_NAME} -u ${ALT_USER_ID} -g ${ALT_USER_NAME} -H -D && echo "User ${ALT_USER_NAME} (id: ${USER_ID}) created"
+    adduser ${ALT_USER_NAME} -u ${ALT_USER_ID} -g ${ALT_USER_NAME} -H -D && echo "User ${ALT_USER_NAME} (id: ${ALT_USER_ID}) created"
 
 # Prepare/install transmission
 RUN mkdir /downloads /incomplete /watch && \

@@ -15,6 +15,17 @@ This repository contains a collection of [OCI Images](https://github.com/opencon
 
 - Available in my **Packages** section
 
+## Images Status
+
+- [![oci-homeassistant-build](https://github.com/thomaschampagne/oci-images/actions/workflows/homeassistant.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/homeassistant.yaml)
+- [![oci-filebrowser-build](https://github.com/thomaschampagne/oci-images/actions/workflows/filebrowser.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/filebrowser.yaml)
+- [![oci-homeassistant-build](https://github.com/thomaschampagne/oci-images/actions/workflows/homeassistant.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/homeassistant.yaml)
+- [![oci-mosquitto-build](https://github.com/thomaschampagne/oci-images/actions/workflows/mosquitto.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/mosquitto.yaml)
+- [![oci-navidrome-build](https://github.com/thomaschampagne/oci-images/actions/workflows/navidrome.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/navidrome.yaml)
+- [![oci-pydav-build](https://github.com/thomaschampagne/oci-images/actions/workflows/pydav.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/pydav.yaml)
+- [![oci-transmission-build](https://github.com/thomaschampagne/oci-images/actions/workflows/transmission.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/transmission.yaml)
+- [![oci-zigbee2mqtt-build](https://github.com/thomaschampagne/oci-images/actions/workflows/zigbee2mqtt.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/zigbee2mqtt.yaml)
+
 ## Appendix
 
 ### Trigger workflow from remote

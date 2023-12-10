@@ -41,27 +41,34 @@ LABEL \
 #---- START IMAGE SPEC HERE ----#
 ARG ALT_USER_NAME=oci
 ARG ALT_USER_ID=1000
+ENV PYDAV_PORT=8080
 
 # Run upgrades
 RUN apk update && apk --no-cache upgrade && \
     # Create oci user
-    adduser ${ALT_USER_NAME} -u ${ALT_USER_ID} -g ${ALT_USER_NAME} -H -D && echo "User ${ALT_USER_NAME} (id: ${USER_ID}) created"
+    adduser ${ALT_USER_NAME} -u ${ALT_USER_ID} -g ${ALT_USER_NAME} -H -D && echo "User ${ALT_USER_NAME} (id: ${ALT_USER_ID}) created"
 
 WORKDIR /app
 
-RUN apk --no-cache add python3 && \
-    python -m venv venv && \
-    source ./venv/bin/activate && \
-    python -m pip install --no-cache-dir cheroot lxml wsgidav && \
-    pip cache purge
+COPY ./default.config.yaml ./default.config.yaml
+COPY ./run.sh ./run.sh
 
-# Create /data folder with default realm
-RUN mkdir -p /data/realms/default
-
-COPY ./wsgidav.yaml ./wsgidav.yaml
+RUN \
+    # Ensure linux files after copy
+    dos2unix * && \
+    # Install Python & Yq for yaml file operations
+    apk --no-cache add python3 yq && \
+    # Create python virtual env & activate it
+    python -m venv venv && source ./venv/bin/activate && \
+    # Install python wsgidav with dependencies
+    python -m pip install --no-cache-dir cheroot lxml wsgidav && pip cache purge && \
+    # Ensure run.sh exec mode
+    chmod +x /app/run.sh && \
+    # Create folder to store webdav data
+    mkdir /data
 
 VOLUME ["/data"]
 
-EXPOSE 8080
+EXPOSE ${PYDAV_PORT}
 
-CMD ["/bin/sh", "-c", "source ./venv/bin/activate && wsgidav --config=/app/wsgidav.yaml"]
+CMD ["/app/run.sh"]

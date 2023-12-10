@@ -42,4 +42,4 @@ podman run -dit \
     -v oci-$APP_NAME-data:/data \
     $IMAGE
 
-echo -e "\nContainer running. Access app at: http://localhost:$PORT/realms/default"
+echo -e "\nContainer running. Access app at: http://localhost:$PORT/"
