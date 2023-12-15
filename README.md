@@ -15,7 +15,7 @@ This repository contains a collection of [OCI Images](https://github.com/opencon
 
 - Available in my **Packages** section
 
-## Apppendix
+## Appendix
 
 ### Trigger workflow from remote
 
