@@ -17,7 +17,6 @@ This repository contains a collection of [OCI Images](https://github.com/opencon
 
 ## Images Status
 
-- [![oci-homeassistant-build](https://github.com/thomaschampagne/oci-images/actions/workflows/homeassistant.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/homeassistant.yaml)
 - [![oci-filebrowser-build](https://github.com/thomaschampagne/oci-images/actions/workflows/filebrowser.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/filebrowser.yaml)
 - [![oci-homeassistant-build](https://github.com/thomaschampagne/oci-images/actions/workflows/homeassistant.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/homeassistant.yaml)
 - [![oci-mosquitto-build](https://github.com/thomaschampagne/oci-images/actions/workflows/mosquitto.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/mosquitto.yaml)
