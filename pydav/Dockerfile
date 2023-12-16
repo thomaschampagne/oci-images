@@ -1,7 +1,7 @@
 ARG OCI_BASE_IMAGE=alpine:3.18
 ARG OCI_BASE_IMAGE_URL=https://hub.docker.com/_/alpine/
-ARG OCI_TITLE=oci-transmission-image
-ARG OCI_DESCRIPTION="Transmission Torrent Client"
+ARG OCI_TITLE=oci-pydav-image
+ARG OCI_DESCRIPTION="Python WebDAV Server Based On WSGI"
 ARG OCI_MAINTAINER="Thomas Champagne"
 
 ##### NO EDIT ZONE - START #####
@@ -41,27 +41,34 @@ LABEL \
 #---- START IMAGE SPEC HERE ----#
 ARG ALT_USER_NAME=oci
 ARG ALT_USER_ID=1000
+ENV PYDAV_PORT=8080
 
 # Run upgrades
 RUN apk update && apk --no-cache upgrade && \
     # Create oci user
     adduser ${ALT_USER_NAME} -u ${ALT_USER_ID} -g ${ALT_USER_NAME} -H -D && echo "User ${ALT_USER_NAME} (id: ${ALT_USER_ID}) created"
 
-# Prepare/install transmission
-RUN mkdir /downloads /incomplete /watch && \
-    # Give rights to rootless user on folder
-    chown -R ${ALT_USER_NAME}:${ALT_USER_NAME} /downloads /incomplete /watch && \
-    # Install transmission
-    apk add --no-cache tzdata transmission-daemon
+WORKDIR /app
 
-COPY ./settings.json /config/settings.json
+COPY ./default.config.yaml ./default.config.yaml
+COPY ./run.sh ./run.sh
 
-VOLUME ["/downloads", "/incomplete", "/watch"]
+RUN \
+    # Ensure linux files after copy
+    dos2unix * && \
+    # Install Python & Yq for yaml file operations
+    apk --no-cache add python3 yq && \
+    # Create python virtual env & activate it
+    python -m venv venv && source ./venv/bin/activate && \
+    # Install python wsgidav with dependencies
+    python -m pip install --no-cache-dir cheroot lxml wsgidav && pip cache purge && \
+    # Ensure run.sh exec mode
+    chmod +x /app/run.sh && \
+    # Create folder to store webdav data
+    mkdir /data
 
-EXPOSE 9091 51413/tcp 51413/udp
+VOLUME ["/data"]
 
-ENTRYPOINT ["/usr/bin/transmission-daemon", "--foreground", \
-    "--download-dir", "/downloads", \
-    "--incomplete-dir", "/incomplete", \
-    "--watch-dir", "/watch", \
-    "--config-dir", "/config"]
+EXPOSE ${PYDAV_PORT}
+
+CMD ["/app/run.sh"]
