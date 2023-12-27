@@ -1,9 +1,10 @@
 #!/bin/bash
 
-APP_NAME=pydav
+APP_NAME=minio
 TAG=develop
 IMAGE=thomaschampagne/oci-$APP_NAME:$TAG
-PORT=8080
+PORT_1=9000
+PORT_2=9001
 
 cd "$(dirname "$0")" || exit
 
@@ -38,8 +39,9 @@ podman volume create oci-$APP_NAME-data 2> /dev/null
 # Run
 podman run -dit \
     --name $APP_NAME \
-    -p $PORT:$PORT \
+    -p $PORT_1:$PORT_1 \
+    -p $PORT_2:$PORT_2 \
     -v oci-$APP_NAME-data:/data \
     $IMAGE
 
-echo -e "\nContainer running. Access app at: http://localhost:$PORT/"
+echo -e "\nContainer running. Access app at: http://localhost:$PORT_1 & http://localhost:$PORT_2"

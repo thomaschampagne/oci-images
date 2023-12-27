@@ -1,7 +1,7 @@
-name: oci-pydav-build
+name: oci-minio-build
 
 env:
-  OCI_APP_NAME: pydav
+  OCI_APP_NAME: minio
   IMAGE_PREFIX: oci-
 
 on:
