@@ -1,7 +1,7 @@
 ARG OCI_BASE_IMAGE=alpine:3.18
 ARG OCI_BASE_IMAGE_URL=https://hub.docker.com/_/alpine/
-ARG OCI_TITLE=oci-pydav-image
-ARG OCI_DESCRIPTION="Python WebDAV Server Based On WSGI"
+ARG OCI_TITLE=oci-minio-image
+ARG OCI_DESCRIPTION="High-Performance Object Store"
 ARG OCI_MAINTAINER="Thomas Champagne"
 
 ##### NO EDIT ZONE - START #####
@@ -41,7 +41,6 @@ LABEL \
 #---- START IMAGE SPEC HERE ----#
 ARG ALT_USER_NAME=oci
 ARG ALT_USER_ID=1000
-ENV PYDAV_PORT=8080
 
 # Run upgrades
 RUN apk update && apk --no-cache upgrade && \
@@ -50,25 +49,32 @@ RUN apk update && apk --no-cache upgrade && \
 
 WORKDIR /app
 
-COPY ./default.config.yaml ./default.config.yaml
-COPY ./run.sh ./run.sh
-
 RUN \
-    # Ensure linux files after copy
-    dos2unix * && \
-    # Install Python & Yq for yaml file operations
-    apk --no-cache add python3 yq && \
-    # Create python virtual env & activate it
-    python -m venv venv && source ./venv/bin/activate && \
-    # Install python wsgidav with dependencies
-    python -m pip install --no-cache-dir cheroot lxml wsgidav && pip cache purge && \
-    # Ensure run.sh exec mode
-    chmod +x /app/run.sh && \
-    # Create folder to store webdav data
+    # Download minio along host architecture
+    ARCH=$(uname -m); \
+    if [ "$ARCH" = "x86_64" ]; then \
+        ARCH=amd64; \
+    elif [ "$ARCH" = "aarch64" ]; then \
+        ARCH=arm64; \
+    else \
+        echo "Unsupported architecture: $ARCH"; \
+        exit 1; \
+    fi; \
+    # Fetch Minio
+    wget $(echo "https://dl.min.io/server/minio/release/linux-$ARCH/minio") && \
+    # Apply proper rights on executable
+    chmod +x minio && \ 
+    # Create folder for volume data
     mkdir /data
+
+# Define defaults minio root credentials
+ENV MINIO_ROOT_USER=minioadmin
+ENV MINIO_ROOT_PASSWORD=minioadmin
 
 VOLUME ["/data"]
 
-EXPOSE ${PYDAV_PORT}
+EXPOSE 9000
+EXPOSE 9001
 
-CMD ["/app/run.sh"]
+# Exec Minio
+CMD ["/app/minio", "server", "/data", "--console-address", ":9001"]
