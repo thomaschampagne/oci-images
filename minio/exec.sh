@@ -31,7 +31,7 @@ if [[ "$opt_clear" == "true" ]]; then
 fi
 
 # Build image
-podman build -t $IMAGE .
+podman build -t $IMAGE . && podman image prune -f
 
 # Create required volume
 podman volume create oci-$APP_NAME-data 2> /dev/null
@@ -44,4 +44,6 @@ podman run -dit \
     -v oci-$APP_NAME-data:/data \
     $IMAGE
 
-echo -e "\nContainer running. Access app at: http://localhost:$PORT_1 & http://localhost:$PORT_2"
+echo -e "\n[Info] Container running. Access app at: http://localhost:$PORT_1 & http://localhost:$PORT_2"
+echo -e "\n[Info] Connect to container with: podman exec -it $APP_NAME sh\n\n"
+podman logs -f $APP_NAME

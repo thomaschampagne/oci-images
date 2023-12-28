@@ -49,27 +49,16 @@ RUN apk update && apk --no-cache upgrade && \
 
 WORKDIR /app
 
-RUN \
-    # Download minio along host architecture
-    ARCH=$(uname -m); \
-    if [ "$ARCH" = "x86_64" ]; then \
-        ARCH=amd64; \
-    elif [ "$ARCH" = "aarch64" ]; then \
-        ARCH=arm64; \
-    else \
-        echo "Unsupported architecture: $ARCH"; \
-        exit 1; \
-    fi; \
-    # Fetch Minio
-    wget $(echo "https://dl.min.io/server/minio/release/linux-$ARCH/minio") && \
-    # Apply proper rights on executable
-    chmod +x minio && \ 
-    # Create folder for volume data
-    mkdir /data
-
 # Define defaults minio root credentials
 ENV MINIO_ROOT_USER=minioadmin
 ENV MINIO_ROOT_PASSWORD=minioadmin
+ENV MINIO_BROWSER_LOGIN_ANIMATION=false
+
+RUN \
+    # Install minio from alpine repo
+    apk add --no-cache minio && \
+    # Create folder for volume data
+    mkdir /data
 
 VOLUME ["/data"]
 
@@ -77,4 +66,4 @@ EXPOSE 9000
 EXPOSE 9001
 
 # Exec Minio
-CMD ["/app/minio", "server", "/data", "--console-address", ":9001"]
+CMD ["/usr/bin/minio", "server", "/data", "--console-address", ":9001"]
