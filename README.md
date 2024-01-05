@@ -2,18 +2,18 @@
 
 ## About
 
-This repository contains a collection of [OCI Images](https://github.com/opencontainers/image-spec) I use in my clusters:
+This repository contains a collection of [OCI Images](https://github.com/opencontainers/image-spec) I use in my clusters. Images are:
 
 - Built on **STABLE** base images **ONLY**. Versions are specified in each Dockerfile via `OCI_BASE_IMAGE` ARG.
 
 - Build weekly on Sundays and tagged as `YYYY.MM.DD` & `latest`.
 
-- Lower attack surface & vulneralibities:
+- Exposed to lower attack surface & vulneralibities:
     - Based on `alpine` lightweight images whenever possible.
     - System updates are applied during build.
-    - If missing from base image, it includes a non-root user named `oci` (`uid:1000`, `gid:1000`).
+    - If missing from base image, it includes a `non-root` user named `oci` (`uid:1000`, `gid:1000`).
 
-- Available in my **Packages** section
+- Available in my **Packages** section.
 
 ## Images Status
 
