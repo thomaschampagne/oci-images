@@ -8,10 +8,10 @@ This repository contains a collection of [OCI Images](https://github.com/opencon
 
 - Build weekly on Sundays and tagged as `YYYY.MM.DD` & `latest`.
 
-- Exposed to lower attack surface & vulneralibities:
-    - Based on `alpine` lightweight images whenever possible.
-    - System updates are applied during build.
-    - If missing from base image, it includes a `non-root` user named `oci` (`uid:1000`, `gid:1000`).
+- Exposed to lower attack surface & vulnerabilities:
+  - Based on `alpine` lightweight images whenever possible.
+  - System updates are applied during build.
+  - If missing from base image, it includes a `non-root` user named `oci` (`uid:1000`, `gid:1000`).
 
 - Available in my **Packages** section.
 
@@ -29,14 +29,14 @@ This repository contains a collection of [OCI Images](https://github.com/opencon
 
 ### Trigger workflow from remote
 
-- Create `GITHUB_TOKEN` here: https://github.com/settings/tokens with `actions:write` permissions.
+- Create `GITHUB_TOKEN` here: <https://github.com/settings/tokens> with `actions:write` permissions.
 
 ```bash
 export GITHUB_TOKEN=<YOUR_TOKEN>
 export GITHUB_REPO=<YOUR_REPO> # e.g. thomaschampagne/focale-images
 ```
 
-- Get workflow id (https://docs.github.com/en/rest/actions/workflows?apiVersion=2022-11-28#list-repository-workflows)
+- Get workflow id (<https://docs.github.com/en/rest/actions/workflows?apiVersion=2022-11-28#list-repository-workflows>)
 
 ```bash
 curl -L \
@@ -46,7 +46,7 @@ curl -L \
   https://api.github.com/repos/$GITHUB_REPO/actions/workflows
 ```
 
-- Create a workflow dispatch event (https://docs.github.com/en/rest/actions/workflows?apiVersion=2022-11-28#create-a-workflow-dispatch-event)
+- Create a workflow dispatch event (<https://docs.github.com/en/rest/actions/workflows?apiVersion=2022-11-28#create-a-workflow-dispatch-event>)
 
 ```bash
 export WORKFLOW_ID=<WORKFLOW_ID>
