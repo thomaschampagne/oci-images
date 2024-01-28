@@ -1,0 +1,10 @@
+server: cheroot
+host: 0.0.0.0
+verbose: 3
+provider_mapping:
+    "/": "/data"
+simple_dc:
+    user_mapping:
+        "*":
+            "admin":
+                password: "admin"
