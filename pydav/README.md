@@ -2,9 +2,9 @@
 
 - Image based on [WsgiDAV](https://wsgidav.readthedocs.io/).
 
-- Create `override.config.yaml` and map it to `/app/override.config.yaml` to override the default configuration `(/app/default.config.yaml`).
+- Create `override.config.yaml` and map it to `/app/config/override.config.yaml` to override the default configuration `(/app/config/default.config.yaml`).
 
-- `/app/override.config.yaml` sample:
+- `/app/config/override.config.yaml` sample:
 
 ```yaml
 # Edit below yaml to override the default configuration (default.config.yaml)
@@ -31,7 +31,7 @@ http_authenticator:
 
 provider_mapping:
     "/": "/data"
-    "/realms/default": "/data/realms/default"
+    "/realm/default": "/data/realm/default"
 
 # Additional options for SimpleDomainController only:
 simple_dc:
@@ -39,7 +39,7 @@ simple_dc:
         "*":
             "admin":
                 password: "admin"
-        "/realms/default":
+        "/realm/default":
             "default":
                 password: "default"
 ```

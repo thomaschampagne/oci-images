@@ -42,6 +42,6 @@ podman run -dit \
     -v oci-$APP_NAME-data:/data \
     $IMAGE
 
-echo -e "\n[Info] Container running."
+echo -e "\n[Info] Container running. Access app at: http://localhost:$PORT"
 echo -e "\n[Info] Connect to container with: podman exec -it $APP_NAME sh\n\n"
 podman logs -f $APP_NAME

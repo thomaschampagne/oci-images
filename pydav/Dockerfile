@@ -50,12 +50,10 @@ RUN apk update && apk --no-cache upgrade && \
 
 WORKDIR /app
 
-COPY ./default.config.yaml ./default.config.yaml
+COPY ./config ./config/
 COPY ./run.sh ./run.sh
 
 RUN \
-    # Ensure linux files after copy
-    dos2unix * && \
     # Install Python & Yq for yaml file operations
     apk --no-cache add python3 yq && \
     # Create python virtual env & activate it
