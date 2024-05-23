@@ -1,4 +1,4 @@
-ARG OCI_BASE_IMAGE=deluan/navidrome:0.51.1
+ARG OCI_BASE_IMAGE=deluan/navidrome:0.52.5
 ARG OCI_BASE_IMAGE_URL=https://hub.docker.com/r/deluan/navidrome
 ARG OCI_TITLE=oci-navidrome-image
 ARG OCI_DESCRIPTION="Subsonic Music Server"
