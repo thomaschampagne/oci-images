@@ -1,4 +1,4 @@
-ARG OCI_BASE_IMAGE=alpine:3.19.1
+ARG OCI_BASE_IMAGE=alpine:3.19
 ARG OCI_BASE_IMAGE_URL=https://hub.docker.com/_/alpine/
 ARG OCI_TITLE=oci-transmission-image
 ARG OCI_DESCRIPTION="Transmission Torrent Client"
