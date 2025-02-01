@@ -25,6 +25,7 @@ This repository contains a collection of [OCI Images](https://github.com/opencon
 - [![oci-pydav-build](https://github.com/thomaschampagne/oci-images/actions/workflows/pydav.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/pydav.yaml)
 - [![oci-transmission-build](https://github.com/thomaschampagne/oci-images/actions/workflows/transmission.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/transmission.yaml)
 - [![oci-zigbee2mqtt-build](https://github.com/thomaschampagne/oci-images/actions/workflows/zigbee2mqtt.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/zigbee2mqtt.yaml)
+- [![oci-authelia-build](https://github.com/thomaschampagne/oci-images/actions/workflows/authelia.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/authelia.yaml)
 
 ## Appendix
 
