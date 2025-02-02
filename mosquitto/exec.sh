@@ -25,7 +25,7 @@ docker rm -f $APP_NAME
 
 # Clear if requested
 if [[ "$opt_clear" == "true" ]]; then
-    docker image rm $IMAGE
+  docker image rm $IMAGE
 fi
 
 # Build image
