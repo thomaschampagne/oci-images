@@ -145,10 +145,9 @@ if [ $# -eq 0 ]; then
         for script in /app/entrypoint.d/*.sh; do
           if [ -f "$script" ]; then
             # Print a message indicating the script is being executed
-            echo "Executing $script"
-
-            # Execute the script
-            sh "$script"
+            echo "Executing $script" && \
+              # Ensure unix format & Execute the script
+              sh <(dos2unix < "$script")
           fi
         done
       fi
