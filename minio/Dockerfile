@@ -1,4 +1,4 @@
-ARG OCI_BASE_IMAGE=alpine:3.20
+ARG OCI_BASE_IMAGE=alpine:3.21
 ARG OCI_BASE_IMAGE_URL=https://hub.docker.com/_/alpine/
 ARG OCI_TITLE=oci-minio-image
 ARG OCI_DESCRIPTION="High-Performance Object Store"
