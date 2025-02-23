@@ -39,7 +39,7 @@ jobs:
 
       # Push to GitHub Container Registry
       - name: Push to Github Container Registry
-        uses: docker/build-push-action@v5 # https://github.com/marketplace/actions/build-and-push-docker-images
+        uses: docker/build-push-action@v6 # https://github.com/marketplace/actions/build-and-push-docker-images
         with:
           context: ./${{ env.OCI_APP_NAME }}
           build-args: |
