@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  quality:
+    if: github.ref == 'refs/heads/main'
+    name: quality
+    runs-on: ubuntu-latest
+    permissions: read-all
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set Project Version
+        run: |
+          BRANCH_NAME=${GITHUB_REF#refs/heads/}
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          PROJECT_VERSION="$BRANCH_NAME@$SHORT_SHA"
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+          echo "SHORT_SHA=$SHORT_SHA" >> $GITHUB_ENV
+          echo "PROJECT_VERSION=$PROJECT_VERSION" >> $GITHUB_ENV
+
+      - name: dependency-check
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: ${{ secrets.SONAR_PROJECT_KEY }}
+          path: .
+          format: ALL
+          out: reports
+          args: >
+            --enableRetired
+            --failOnCVSS 7
+
+      - uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_ROOT_CERT: ${{ secrets.SONAR_ROOT_CERT }}
+        with:
+          args: >
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+            -Dsonar.projectVersion=${{ env.PROJECT_VERSION }}
+            -Dsonar.exclusions=**/target/**,**/build/**,**/bin/**,**/obj/**,**/generated/**,**/node_modules/**,**/vendor/**,**/*.min.js,**/*.min.css,**/*.js.map,**/*.css.map,**/coverage/**,**/reports/**
+            -Dsonar.dependencyCheck.jsonReportPath=reports/dependency-check-report.json
+            -Dsonar.dependencyCheck.htmlReportPath=reports/dependency-check-report.html
+            -Dsonar.dependencyCheck.securityHotspot=true
+            -Dsonar.dependencyCheck.severity.high=7.0
+            -Dsonar.dependencyCheck.severity.medium=4.0
+            -Dsonar.dependencyCheck.severity.low=0.0
+
+      # If you wish to fail your job when the Quality Gate is red, uncomment the
+      # following lines. This would typically be used to fail a deployment.
+      - uses: sonarsource/sonarqube-quality-gate-action@master
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_ROOT_CERT: ${{ secrets.SONAR_ROOT_CERT }}
