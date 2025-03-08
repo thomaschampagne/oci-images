@@ -15,21 +15,22 @@ This repository contains a collection of [OCI Images](https://github.com/opencon
 
 - Available in my **Packages** section.
 
-## Images Status 
+## Images Status
 
-| Service         | Description                                      | OS     | Image Name / Build Status |  
-|---------------|------------------------------------------------|--------|----------------------------|  
-| **FileBrowser**  | Web-based file manager.                         | Alpine | [![oci-filebrowser-build](https://github.com/thomaschampagne/oci-images/actions/workflows/filebrowser.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/filebrowser.yaml) |  
-| **HomeAssistant** | Home automation platform.                      | Alpine | [![oci-homeassistant-build](https://github.com/thomaschampagne/oci-images/actions/workflows/homeassistant.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/homeassistant.yaml) |  
-| **Mosquitto**    | MQTT broker for IoT.                            | Alpine | [![oci-mosquitto-build](https://github.com/thomaschampagne/oci-images/actions/workflows/mosquitto.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/mosquitto.yaml) |  
-| **Navidrome**    | Self-hosted music server.                       | Alpine | [![oci-navidrome-build](https://github.com/thomaschampagne/oci-images/actions/workflows/navidrome.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/navidrome.yaml) |  
-| **MinIO**        | S3-compatible object storage.                   | Alpine | [![oci-minio-build](https://github.com/thomaschampagne/oci-images/actions/workflows/minio.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/minio.yaml) |  
-| **PyDaV**        | WebDAV server.                                  | Alpine | [![oci-pydav-build](https://github.com/thomaschampagne/oci-images/actions/workflows/pydav.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/pydav.yaml) |  
-| **Transmission** | BitTorrent client.                             | Alpine | [![oci-transmission-build](https://github.com/thomaschampagne/oci-images/actions/workflows/transmission.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/transmission.yaml) |  
-| **Zigbee2MQTT**  | Zigbee to MQTT bridge.                         | Alpine | [![oci-zigbee2mqtt-build](https://github.com/thomaschampagne/oci-images/actions/workflows/zigbee2mqtt.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/zigbee2mqtt.yaml) |  
-| **Authelia**     | Multi-factor authentication server.             | Alpine | [![oci-authelia-build](https://github.com/thomaschampagne/oci-images/actions/workflows/authelia.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/authelia.yaml) |  
-| **Cloud Domain** | Domain services for homes and small businesses.                       | Alpine | [![oci-cloud-domain-build](https://github.com/thomaschampagne/oci-images/actions/workflows/cloud-domain.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/cloud-domain.yaml) |  
-| **PostgreSQL**   | Relational database.                           | Alpine | [![oci-postgres-build](https://github.com/thomaschampagne/oci-images/actions/workflows/postgres.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/postgres.yaml) |  
+
+| Service         | Image Name / Build Status                                                                                     | OS     | Description                                      |
+|-----------------|---------------------------------------------------------------------------------------------------------------|--------|--------------------------------------------------|
+| **FileBrowser** | [![oci-filebrowser-build](https://github.com/thomaschampagne/oci-images/actions/workflows/filebrowser.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/filebrowser.yaml) | Alpine | Web-based file manager.                         |
+| **HomeAssistant** | [![oci-homeassistant-build](https://github.com/thomaschampagne/oci-images/actions/workflows/homeassistant.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/homeassistant.yaml) | Alpine | Home automation platform.                      |
+| **Mosquitto**   | [![oci-mosquitto-build](https://github.com/thomaschampagne/oci-images/actions/workflows/mosquitto.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/mosquitto.yaml) | Alpine | MQTT broker for IoT.                            |
+| **Navidrome**   | [![oci-navidrome-build](https://github.com/thomaschampagne/oci-images/actions/workflows/navidrome.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/navidrome.yaml) | Alpine | Self-hosted music server.                       |
+| **MinIO**       | [![oci-minio-build](https://github.com/thomaschampagne/oci-images/actions/workflows/minio.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/minio.yaml) | Alpine | S3-compatible object storage.                   |
+| **PyDaV**       | [![oci-pydav-build](https://github.com/thomaschampagne/oci-images/actions/workflows/pydav.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/pydav.yaml) | Alpine | WebDAV server.                                  |
+| **Transmission**| [![oci-transmission-build](https://github.com/thomaschampagne/oci-images/actions/workflows/transmission.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/transmission.yaml) | Alpine | BitTorrent client.                             |
+| **Zigbee2MQTT** | [![oci-zigbee2mqtt-build](https://github.com/thomaschampagne/oci-images/actions/workflows/zigbee2mqtt.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/zigbee2mqtt.yaml) | Alpine | Zigbee to MQTT bridge.                         |
+| **Authelia**    | [![oci-authelia-build](https://github.com/thomaschampagne/oci-images/actions/workflows/authelia.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/authelia.yaml) | Alpine | Multi-factor authentication server.             |
+| **Cloud Domain**| [![oci-cloud-domain-build](https://github.com/thomaschampagne/oci-images/actions/workflows/cloud-domain.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/cloud-domain.yaml) | Alpine | Domain services for homes and small businesses. |
+| **PostgreSQL**  | [![oci-postgres-build](https://github.com/thomaschampagne/oci-images/actions/workflows/postgres.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/postgres.yaml) | Alpine | Relational database.                           |
 
 ## Appendix
 
