@@ -13,6 +13,7 @@ updates:
     # Check for updates once a week
     schedule:
       interval: "daily"
+    open-pull-requests-limit: 10
 
   # Enable version updates for GitHub Actions
   - package-ecosystem: "github-actions"
@@ -21,3 +22,4 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    open-pull-requests-limit: 10
