@@ -31,6 +31,7 @@ This repository contains a collection of [OCI Images](https://github.com/opencon
 | **Authelia**    | [![oci-authelia-build](https://github.com/thomaschampagne/oci-images/actions/workflows/authelia.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/authelia.yaml) | Alpine | Multi-factor authentication server.             |
 | **Cloud Domain**| [![oci-cloud-domain-build](https://github.com/thomaschampagne/oci-images/actions/workflows/cloud-domain.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/cloud-domain.yaml) | Alpine | Domain services for homes and small businesses. |
 | **PostgreSQL**  | [![oci-postgres-build](https://github.com/thomaschampagne/oci-images/actions/workflows/postgres.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/postgres.yaml) | Alpine | Relational database.                           |
+| **Excalidraw**  | [![oci-excalidraw-build](https://github.com/thomaschampagne/oci-images/actions/workflows/excalidraw.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/excalidraw.yaml) | Alpine | Efficient virtual whiteboard.                           |
 
 ## Appendix
 
