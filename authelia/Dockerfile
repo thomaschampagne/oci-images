@@ -1,4 +1,4 @@
-ARG OCI_BASE_IMAGE=authelia/authelia:4.38.19
+ARG OCI_BASE_IMAGE=authelia/authelia:4.38
 ARG OCI_BASE_IMAGE_URL=https://hub.docker.com/r/authelia/authelia
 ARG OCI_TITLE=oci-authelia-image
 ARG OCI_DESCRIPTION="Single Sign-On Multi-Factor Portal"

@@ -5,9 +5,11 @@ ARG OCI_DESCRIPTION="Virtual whiteboard for sketching hand-drawn like diagrams"
 ARG OCI_MAINTAINER="Thomas Champagne"
 
 # ========== Fetch excalidraw static files ==========
-# Sources:
-#  - https://hub.docker.com/r/excalidraw/excalidraw
+# * We might new need to build from master if `excalidraw/excalidraw:latest` image is not regularly updated..
+# See:
+#  - https://github.com/excalidraw/excalidraw/deployments/Production%20%E2%80%93%20excalidraw
 #  - https://github.com/excalidraw/excalidraw/blob/master/Dockerfile
+#  - https://hub.docker.com/r/excalidraw/excalidraw
 FROM excalidraw/excalidraw:latest as static_excalidraw
 
 # ========== Build Go HTTP Static Server ==========
