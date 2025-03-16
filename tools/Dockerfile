@@ -10,10 +10,10 @@ ARG OCI_MAINTAINER="Thomas Champagne"
 #  - https://github.com/CorentinTh/it-tools/blob/main/Dockerfile
 #  - https://hub.docker.com/r/corentinth/it-tools
 
-FROM corentinth/it-tools:latest as static_it_tools
+FROM corentinth/it-tools:latest AS static_it_tools
 
 # ========== Build Go HTTP Static Server ==========
-FROM ${OCI_BASE_IMAGE} as build
+FROM ${OCI_BASE_IMAGE} AS build
 
 WORKDIR /build
 COPY src .
@@ -22,7 +22,7 @@ RUN go build -o /build/tools
 ##### NO EDIT ZONE - START #####
 
 # ========== Build Runner ==========
-FROM ${OCI_BASE_IMAGE} as runner
+FROM ${OCI_BASE_IMAGE} AS runner
 
 ARG OCI_BASE_IMAGE
 ARG OCI_BASE_IMAGE_URL
@@ -69,6 +69,7 @@ ARG ALT_USER_ID=1000
 # Run upgrades
 RUN apk update && apk --no-cache upgrade && \
     # Create oci user
-    adduser ${ALT_USER_NAME} -u ${ALT_USER_ID} -g ${ALT_USER_NAME} -D && echo "User ${ALT_USER_NAME} (id: ${ALT_USER_ID}) created"
+    adduser ${ALT_USER_NAME} -u ${ALT_USER_ID} -g ${ALT_USER_NAME} -D && \
+    echo "User ${ALT_USER_NAME} (id: ${ALT_USER_ID}) created"
 
 CMD ["/app/tools"]

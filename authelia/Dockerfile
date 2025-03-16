@@ -47,4 +47,5 @@ RUN apk update && apk --no-cache upgrade && \
     # Required for templating
     apk add --no-cache gettext && \
     # Create oci user
-    adduser ${ALT_USER_NAME} -u ${ALT_USER_ID} -g ${ALT_USER_NAME} -D && echo "User ${ALT_USER_NAME} (id: ${ALT_USER_ID}) created"
+    adduser ${ALT_USER_NAME} -u ${ALT_USER_ID} -g ${ALT_USER_NAME} -D && \
+    echo "User ${ALT_USER_NAME} (id: ${ALT_USER_ID}) created"
