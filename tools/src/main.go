@@ -1,4 +1,3 @@
-// Serve it-tools directory over HTTP
 package main
 
 import (
@@ -6,31 +5,43 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 )
 
-const DEFAULT_PORT = "3000"
-const DEFAULT_SERVE_FOLDER = "./static"
+const (
+	DEFAULT_PORT         = "3000"
+	DEFAULT_SERVE_FOLDER = "./static"
+	INDEX_FILE           = "index.html"
+)
 
 func main() {
 
-	// Get the port from the environment variable, or use the default port
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = DEFAULT_PORT
-	}
+	port := getEnv("PORT", DEFAULT_PORT)
 
-	log.Printf("Starting server...")
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		// Build the full path to the requested file
+		requestedPath := filepath.Join(DEFAULT_SERVE_FOLDER, r.URL.Path)
 
-	// Local directory to serve
-	fs := http.FileServer(http.Dir(DEFAULT_SERVE_FOLDER))
+		// Check if the requested file exists
+		if _, err := os.Stat(requestedPath); err == nil {
+			http.ServeFile(w, r, requestedPath)
+			return
+		}
 
-	// Attach the FileServer to a URL path
-	http.Handle("/", fs)
+		// Fallback to serving index.html (URL rewrite)
+		http.ServeFile(w, r, filepath.Join(DEFAULT_SERVE_FOLDER, INDEX_FILE))
+	})
 
-	// Start the HTTP server
-	log.Printf("Server started on port %s", port)
-	err := http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
-	if err != nil {
+	log.Printf("Server running at http://localhost:%s", port)
+	if err := http.ListenAndServe(fmt.Sprintf(":%s", port), nil); err != nil {
 		log.Fatal(err)
 	}
+}
+
+func getEnv(name string, defaultValue string) string {
+	envValue := os.Getenv(name)
+	if envValue == "" {
+		return defaultValue
+	}
+	return envValue
 }
