@@ -32,6 +32,7 @@ This repository contains a collection of [OCI Images](https://github.com/opencon
 | **Cloud Domain**| [![oci-cloud-domain-build](https://github.com/thomaschampagne/oci-images/actions/workflows/cloud-domain.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/cloud-domain.yaml) | Alpine | Domain services for homes and small businesses. |
 | **PostgreSQL**  | [![oci-postgres-build](https://github.com/thomaschampagne/oci-images/actions/workflows/postgres.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/postgres.yaml) | Alpine | Relational database.                           |
 | **Excalidraw**  | [![oci-excalidraw-build](https://github.com/thomaschampagne/oci-images/actions/workflows/excalidraw.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/excalidraw.yaml) | Alpine | Efficient virtual whiteboard.                           |
+| **Tools**  | [![oci-tools-build](https://github.com/thomaschampagne/oci-images/actions/workflows/tools.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/tools.yaml) | Alpine | Collection of developers handy tools.                           |
 
 ## Appendix
 
