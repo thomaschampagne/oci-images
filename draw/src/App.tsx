@@ -3,41 +3,66 @@
 // import viteLogo from '/vite.svg'
 import './App.css'
 import "@excalidraw/excalidraw/index.css";
-import { Excalidraw } from '@excalidraw/excalidraw'
-import { LibraryItems } from '@excalidraw/excalidraw/types';
+import { Excalidraw, exportToCanvas } from '@excalidraw/excalidraw'
+import { AppState, BinaryFiles, ExcalidrawImperativeAPI, LibraryItems } from '@excalidraw/excalidraw/types';
+import { useState } from 'react';
+import { OrderedExcalidrawElement } from '@excalidraw/excalidraw/element/types';
 // import { useRef } from 'react';
 // import { ExcalidrawImperativeAPI, LibraryItems } from '@excalidraw/excalidraw/types';
 
 // TODO Fix ext library import
 // TODO Make easy progressive web app?
-// Migrate to preact
+// TODO Fix font loading
+// TODO Migrate to preact
 
 function App() {
+
+  const [excalidrawAPI, setExcalidrawAPI] = useState<ExcalidrawImperativeAPI | null>(null);
+
+  function onDrawingChange(elements: readonly OrderedExcalidrawElement[], appState: AppState, files: BinaryFiles): void {
+    // excalidrawAPI?.getAppState().
+    debugger
+    localStorage.setItem("excalidraw-elements", JSON.stringify(elements));
+    localStorage.setItem("excalidraw-appState", JSON.stringify(appState));
+    localStorage.setItem("excalidraw-files", JSON.stringify(files));
+
+    // excalidrawAPI.
+  }
+
+  /*   function exportData(): void {
+      // const newLocal = exportToCanvas();
+      const state = excalidrawAPI?.getAppState();
+      const elements = excalidrawAPI?.getSceneElements();
+      console.warn(elements, state);
+      debugger;
+      // throw new Error('Function not implemented.');
+    }
+   */
   // const [count, setCount] = useState(0)
 
   // const excalidrawRef = useRef<ExcalidrawImperativeAPI | null>(null);
-
-  const handleLibraryLoad = async () => {
-    debugger
-    if (excalidrawRef.current) {
-      try {
-        const response = await fetch(
-          "https://libraries.excalidraw.com/libraries/youritjang/software-architecture.excalidrawlib"
-        );
-        if (response.ok) {
-          const libraryJson = await response.json();
-          // excalidrawRef.current.updateLibrary(JSON.stringify(libraryJson));
-          console.log(libraryJson);
-          debugger;
-          // console.log("Library loaded successfully!");
-        } else {
-          console.error("Failed to load the library. Status:", response.status);
+  /*
+    const handleLibraryLoad = async () => {
+      debugger
+      if (excalidrawRef.current) {
+        try {
+          const response = await fetch(
+            "https://libraries.excalidraw.com/libraries/youritjang/software-architecture.excalidrawlib"
+          );
+          if (response.ok) {
+            const libraryJson = await response.json();
+            // excalidrawRef.current.updateLibrary(JSON.stringify(libraryJson));
+            console.log(libraryJson);
+            debugger;
+            // console.log("Library loaded successfully!");
+          } else {
+            console.error("Failed to load the library. Status:", response.status);
+          }
+        } catch (error) {
+          console.error("An error occurred while loading the library:", error);
         }
-      } catch (error) {
-        console.error("An error occurred while loading the library:", error);
       }
-    }
-  };
+    }; */
 
   // const handleLibraryLoad = () => {
   //   if (excalidrawRef.current) {
@@ -49,13 +74,10 @@ function App() {
 
   return (
     <>
-      {/* <div>Hello</div> */}
       <div className='wrapper'>
-        <button onClick={handleLibraryLoad}>Load Library</button>
-        <Excalidraw onLibraryChange={(libraryItems: LibraryItems) => {
-          console.warn(libraryItems)
-          // debugger
-        }} />
+        {/* <button onClick={() => exportData()}>export</button> */}
+        {/* <button onClick={handleLibraryLoad}>Load Library</button> */}
+        <Excalidraw excalidrawAPI={api => setExcalidrawAPI(api)} onChange={onDrawingChange} />
       </div>
       {/* <div>
         <a href="https://vite.dev" target="_blank">
