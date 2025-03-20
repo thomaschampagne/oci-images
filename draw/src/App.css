@@ -1,0 +1,64 @@
+html,
+body {
+  /* Remove default margin and padding */
+  margin: 0;
+  padding: 0;
+  /* Ensure the body takes up at least the full height of the viewport */
+  /* min-height: 100vh; */
+  /* overflow-y: hidden; TODO */
+  /* background-color: red; */
+}
+
+#root {
+  /* max-width: 1280px; */
+  display: flex;
+  /* flex: 1; */
+  /* margin: 50px auto; */
+  /* padding: 10px ; */
+  /* padding: 0 auto; */
+  min-width: 100vw;
+  min-height: 100vh;
+  /* text-align: center; */
+  /* background-color: blue; */
+}
+
+.wrapper {
+  flex: 1;
+  /* height: 500px; */
+}
+
+/* .logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+} */
