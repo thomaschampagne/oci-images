@@ -98,5 +98,8 @@ VOLUME ["/shares", "/app/entrypoint.d", "/app/samba/conf.d"]
 # Expose necessary ports for AD DC and file sharing
 EXPOSE 139/tcp 445/tcp 389/tcp 636/tcp
 
+# Set the user to oci
+USER ${ALT_USER_ID}
+
 # Set the entrypoint to the entrypoint script
 ENTRYPOINT ["/sbin/tini", "--", "/app/entrypoint.sh"]

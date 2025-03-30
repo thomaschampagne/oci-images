@@ -70,4 +70,7 @@ VOLUME ["/data"]
 
 EXPOSE ${PYDAV_PORT}
 
+# Set the user to oci
+USER ${ALT_USER_ID}
+
 CMD ["/app/run.sh"]

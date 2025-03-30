@@ -61,6 +61,9 @@ VOLUME ["/downloads", "/incomplete", "/watch"]
 
 EXPOSE 9091 51413/tcp 51413/udp
 
+# Set the user to oci
+USER ${ALT_USER_ID}
+
 ENTRYPOINT ["/usr/bin/transmission-daemon", "--foreground", \
     "--download-dir", "/downloads", \
     "--incomplete-dir", "/incomplete", \

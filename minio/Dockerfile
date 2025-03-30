@@ -66,5 +66,8 @@ VOLUME ["/data"]
 EXPOSE 9000
 EXPOSE 9001
 
+# Set the user to oci
+USER ${ALT_USER_ID}
+
 # Exec Minio
 CMD ["/usr/bin/minio", "server", "/data", "--console-address", ":9001"]
