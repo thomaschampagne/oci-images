@@ -1,29 +1,36 @@
-ARG OCI_BASE_IMAGE=golang:1.24-alpine
-ARG OCI_BASE_IMAGE_URL=https://hub.docker.com/_/golang/
+ARG OCI_BASE_IMAGE=alpine:3.21
+ARG OCI_BASE_IMAGE_URL=https://hub.docker.com/_/alpine/
 ARG OCI_TITLE=oci-tools-image
 ARG OCI_DESCRIPTION="Collection of handy tools for developers"
 ARG OCI_MAINTAINER="Thomas Champagne"
 
-# ========== Fetch tools static files ==========
-# * We might new need to build from master if `corentinth/it-tools:latest` image is not regularly updated..
-# See:
-#  - https://github.com/CorentinTh/it-tools/blob/main/Dockerfile
-#  - https://hub.docker.com/r/corentinth/it-tools
+# ========== Build Webapp ==========
+FROM node:lts-alpine AS build_webapp
 
-FROM corentinth/it-tools:latest AS static_it_tools
+WORKDIR /build
 
-# ========== Build Go HTTP Static Server ==========
-FROM ${OCI_BASE_IMAGE} AS build
+# Install Git and pnpm globally
+RUN apk add --no-cache git && \
+    # Install the latest version of pnpm globally
+    npm install -g pnpm@latest && \
+    # Clone the it-tools repository from GitHub
+    git clone --depth 1 --branch main https://github.com/CorentinTh/it-tools.git . && \
+    # Install project dependencies using pnpm
+    pnpm install && \
+    # Build the project for production
+    VITE_VERCEL_ENV=production pnpm run build
+
+# ========== Build Go HTTP Static Server with embedded webapp ==========
+FROM golang:1-alpine AS build
 
 WORKDIR /build
 COPY src .
-RUN go build -o /build/tools
-
-##### NO EDIT ZONE - START #####
+RUN go build -o ./tools main.go
 
 # ========== Build Runner ==========
 FROM ${OCI_BASE_IMAGE} AS runner
 
+##### NO EDIT ZONE - START #####
 ARG OCI_BASE_IMAGE
 ARG OCI_BASE_IMAGE_URL
 ARG OCI_TITLE
@@ -55,21 +62,25 @@ LABEL \
     org.opencontainers.image.base.url=${OCI_BASE_IMAGE_URL}
 ##### NO EDIT ZONE - END #####
 
-WORKDIR /app
-
-COPY --from=static_it_tools /usr/share/nginx/html /app/static
-COPY --from=build /build/tools /app
-
-ENV PORT=3000
-
 #---- START IMAGE SPEC HERE ----#
 ARG ALT_USER_NAME=oci
 ARG ALT_USER_ID=1000
+
+WORKDIR /app
+
+COPY --from=build_webapp /build/dist /app/static
+COPY --from=build /build/tools /app
 
 # Run upgrades
 RUN apk update && apk --no-cache upgrade && \
     # Create oci user
     adduser ${ALT_USER_NAME} -u ${ALT_USER_ID} -g ${ALT_USER_NAME} -D && \
-    echo "User ${ALT_USER_NAME} (id: ${ALT_USER_ID}) created"
+    echo "User ${ALT_USER_NAME} (id: ${ALT_USER_ID}) created" && \
+    # Set permissions
+    chown -R ${ALT_USER_NAME}:${ALT_USER_NAME} /app
+
+USER ${ALT_USER_ID}
+
+EXPOSE 3000
 
 CMD ["/app/tools"]
