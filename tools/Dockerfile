@@ -12,11 +12,11 @@ WORKDIR /build
 # Install Git and pnpm globally
 RUN apk add --no-cache git && \
     # Install the latest version of pnpm globally
-    npm install -g pnpm@latest && \
+    npm install --ignore-scripts -g pnpm@latest && \
     # Clone the it-tools repository from GitHub
     git clone --depth 1 --branch main https://github.com/CorentinTh/it-tools.git . && \
     # Install project dependencies using pnpm
-    pnpm install && \
+    pnpm install --ignore-scripts && \
     # Build the project for production
     VITE_VERCEL_ENV=production pnpm run build
 
