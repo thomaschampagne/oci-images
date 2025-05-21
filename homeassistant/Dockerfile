@@ -1,4 +1,4 @@
-ARG OCI_BASE_IMAGE=homeassistant/home-assistant:2025.2.4
+ARG OCI_BASE_IMAGE=homeassistant/home-assistant:2025.5.2
 ARG OCI_BASE_IMAGE_URL=https://hub.docker.com/r/homeassistant/home-assistant
 ARG OCI_TITLE=oci-homeassistant-image
 ARG OCI_DESCRIPTION="Open Source Home Automation"

@@ -1,4 +1,4 @@
-ARG OCI_BASE_IMAGE=koenkk/zigbee2mqtt:2.1.3
+ARG OCI_BASE_IMAGE=koenkk/zigbee2mqtt:2.2.1
 ARG OCI_BASE_IMAGE_URL=https://hub.docker.com/r/koenkk/zigbee2mqtt
 ARG OCI_TITLE=oci-zigbee2mqtt-image
 ARG OCI_DESCRIPTION="Zigbee to MQTT bridge"

@@ -1,4 +1,4 @@
-ARG OCI_BASE_IMAGE=postgres:16.8-alpine
+ARG OCI_BASE_IMAGE=postgres:16-alpine
 ARG OCI_BASE_IMAGE_URL=https://hub.docker.com/_/postgres/
 ARG OCI_TITLE=oci-minio-image
 ARG OCI_DESCRIPTION="The PostgreSQL object-relational database system provides reliability and data integrity."
