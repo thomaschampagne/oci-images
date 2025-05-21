@@ -29,8 +29,9 @@ This repository contains a collection of [OCI Images](https://github.com/opencon
 | **Zigbee2MQTT** | [![oci-zigbee2mqtt-build](https://github.com/thomaschampagne/oci-images/actions/workflows/zigbee2mqtt.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/zigbee2mqtt.yaml) | Alpine | Zigbee to MQTT bridge.                         |
 | **Authelia**    | [![oci-authelia-build](https://github.com/thomaschampagne/oci-images/actions/workflows/authelia.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/authelia.yaml) | Alpine | Multi-factor authentication server.             |
 | **Cloud Domain**| [![oci-cloud-domain-build](https://github.com/thomaschampagne/oci-images/actions/workflows/cloud-domain.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/cloud-domain.yaml) | Alpine | Domain services for homes and small businesses. |
+| **Vault**       | [![oci-vault-build](https://github.com/thomaschampagne/oci-images/actions/workflows/vault.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/vault.yaml) | Alpine | Vaultwarden password manager. |
 | **PostgreSQL**  | [![oci-postgres-build](https://github.com/thomaschampagne/oci-images/actions/workflows/postgres.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/postgres.yaml) | Alpine | Relational database.                           |
-| **Tools**  | [![oci-tools-build](https://github.com/thomaschampagne/oci-images/actions/workflows/tools.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/tools.yaml) | Alpine | Collection of developers handy tools.                           |
+| **Tools**       | [![oci-tools-build](https://github.com/thomaschampagne/oci-images/actions/workflows/tools.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/tools.yaml) | Alpine | Collection of developers handy tools.                           |
 
 ## Appendix
 
