@@ -39,6 +39,7 @@ LABEL \
 ##### NO EDIT ZONE - END #####
 
 #---- START IMAGE SPEC HERE ----#
+ARG ALT_USER_ID=1000
 USER root
 
 # Run upgrades and create user
@@ -48,4 +49,4 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-USER 1000
+USER ${ALT_USER_ID}
