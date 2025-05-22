@@ -1,7 +1,7 @@
-ARG OCI_BASE_IMAGE=bitnami/minio:2025.4.22
-ARG OCI_BASE_IMAGE_URL=https://hub.docker.com/r/bitnami/minio
-ARG OCI_TITLE=oci-minio-image
-ARG OCI_DESCRIPTION="High-Performance Object Store"
+ARG OCI_BASE_IMAGE=alpine:3.21
+ARG OCI_BASE_IMAGE_URL=https://hub.docker.com/_/alpine/
+ARG OCI_TITLE=oci-minikit-image
+ARG OCI_DESCRIPTION="A minimalist BusyBox-style image based on Alpine Linux"
 ARG OCI_MAINTAINER="Thomas Champagne"
 
 ##### NO EDIT ZONE - START #####
@@ -39,16 +39,20 @@ LABEL \
 ##### NO EDIT ZONE - END #####
 
 #---- START IMAGE SPEC HERE ----#
+ARG ALT_USER_NAME=oci
 ARG ALT_USER_ID=1000
 
-# Required for updates
-USER root
+RUN \
+    apk update && apk --no-cache upgrade && \
+    apk add --no-cache \
+    gettext \
+    openssl \
+    curl \
+    jq \
+    yq && \
+    rm -rf /var/cache/apk/* && \
+    # Create oci user
+    adduser ${ALT_USER_NAME} -u ${ALT_USER_ID} -g ${ALT_USER_NAME} -D && \
+    echo "User ${ALT_USER_NAME} (id: ${ALT_USER_ID}) created"
 
-# Run upgrades
-RUN apt-get update && \
-    apt-get -y upgrade && \
-    apt-get autoremove -y && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-USER ${ALT_USER_ID}
+CMD ["/bin/sh"]
