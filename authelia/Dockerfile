@@ -1,4 +1,4 @@
-ARG OCI_BASE_IMAGE=authelia/authelia:4.38
+ARG OCI_BASE_IMAGE=authelia/authelia:4.39
 ARG OCI_BASE_IMAGE_URL=https://hub.docker.com/r/authelia/authelia
 ARG OCI_TITLE=oci-authelia-image
 ARG OCI_DESCRIPTION="Single Sign-On Multi-Factor Portal"
@@ -39,16 +39,3 @@ LABEL \
 ##### NO EDIT ZONE - END #####
 
 #---- START IMAGE SPEC HERE ----#
-ARG ALT_USER_NAME=oci
-ARG ALT_USER_ID=1000
-
-# Run upgrades
-RUN apk update && apk --no-cache upgrade && \
-    # Required for templating
-    apk add --no-cache gettext && \
-    # Create oci user
-    adduser ${ALT_USER_NAME} -u ${ALT_USER_ID} -g ${ALT_USER_NAME} -D && \
-    echo "User ${ALT_USER_NAME} (id: ${ALT_USER_ID}) created"
-
-# Set the user to oci
-USER ${ALT_USER_ID}
