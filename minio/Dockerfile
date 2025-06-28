@@ -1,4 +1,4 @@
-ARG OCI_BASE_IMAGE=bitnami/minio:2025.4.22
+ARG OCI_BASE_IMAGE=bitnami/minio:2025.5.24
 ARG OCI_BASE_IMAGE_URL=https://hub.docker.com/r/bitnami/minio
 ARG OCI_TITLE=oci-minio-image
 ARG OCI_DESCRIPTION="High-Performance Object Store"
