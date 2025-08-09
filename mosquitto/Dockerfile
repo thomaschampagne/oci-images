@@ -1,4 +1,4 @@
-ARG OCI_BASE_IMAGE=eclipse-mosquitto:2.0.21
+ARG OCI_BASE_IMAGE=eclipse-mosquitto:2.0.22
 ARG OCI_BASE_IMAGE_URL=https://hub.docker.com/_/eclipse-mosquitto
 ARG OCI_TITLE=oci-mosquitto-image
 ARG OCI_DESCRIPTION="MQTT Message Broker"

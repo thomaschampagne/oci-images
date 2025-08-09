@@ -1,4 +1,4 @@
-ARG OCI_BASE_IMAGE=filebrowser/filebrowser:v2.32.0
+ARG OCI_BASE_IMAGE=filebrowser/filebrowser:v2.42.3
 ARG OCI_BASE_IMAGE_URL=https://hub.docker.com/r/filebrowser/filebrowser
 ARG OCI_TITLE=oci-filebrowser-image
 ARG OCI_DESCRIPTION="Web-based File Manager"
@@ -37,16 +37,3 @@ LABEL \
     org.opencontainers.image.base.name=${OCI_BASE_IMAGE} \
     org.opencontainers.image.base.url=${OCI_BASE_IMAGE_URL}
 ##### NO EDIT ZONE - END #####
-
-#---- START IMAGE SPEC HERE ----#
-ARG ALT_USER_NAME=oci
-ARG ALT_USER_ID=1000
-
-# Run upgrades
-RUN apk update && apk --no-cache upgrade && \
-    # Create oci user
-    adduser ${ALT_USER_NAME} -u ${ALT_USER_ID} -g ${ALT_USER_NAME} -D && \
-    echo "User ${ALT_USER_NAME} (id: ${ALT_USER_ID}) created"
-
-# Set the user to oci
-USER ${ALT_USER_ID}
