@@ -1,8 +1,31 @@
-ARG OCI_BASE_IMAGE=bitnami/minio:2025.7.23
-ARG OCI_BASE_IMAGE_URL=https://hub.docker.com/r/bitnami/minio
+ARG OCI_BASE_IMAGE=alpine:3.21
+ARG OCI_BASE_IMAGE_URL=https://hub.docker.com/_/alpine/
 ARG OCI_TITLE=oci-minio-image
 ARG OCI_DESCRIPTION="High-Performance Object Store"
 ARG OCI_MAINTAINER="Thomas Champagne"
+
+# ---- BUILDER: fetch latest MinIO server + mc ----
+FROM ${OCI_BASE_IMAGE} AS builder
+
+ARG TARGETOS=linux
+ARG TARGETARCH=amd64
+
+RUN apk add --no-cache ca-certificates wget && update-ca-certificates
+
+# Download latest version
+# Resolve proper download directory per architecture
+# Supported here: amd64, arm64, ppc64le
+RUN set -eux; \
+    case "${TARGETARCH}" in \
+    amd64)   ARCH_DIR="linux-amd64"  ;; \
+    arm64)   ARCH_DIR="linux-arm64"  ;; \
+    ppc64le) ARCH_DIR="linux-ppc64le";; \
+    *) echo "Unsupported TARGETARCH=${TARGETARCH}"; exit 1 ;; \
+    esac; \
+    mkdir -p /out; \
+    wget -O /out/minio "https://dl.min.io/server/minio/release/${ARCH_DIR}/minio"; \
+    wget -O /out/mc    "https://dl.min.io/client/mc/release/${ARCH_DIR}/mc"; \
+    chmod +x /out/minio /out/mc
 
 ##### NO EDIT ZONE - START #####
 FROM ${OCI_BASE_IMAGE}
@@ -39,16 +62,40 @@ LABEL \
 ##### NO EDIT ZONE - END #####
 
 #---- START IMAGE SPEC HERE ----#
+ARG ALT_USER_NAME=oci
 ARG ALT_USER_ID=1000
 
-# Required for updates
-USER root
+WORKDIR /app
 
-# Run upgrades
-RUN apt-get update && \
-    apt-get -y upgrade && \
-    apt-get autoremove -y && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+COPY --from=builder /out/minio /usr/local/bin/minio
+COPY --from=builder /out/mc    /usr/local/bin/mc
+COPY ./entrypoint.sh ./entrypoint.sh
 
+# Define defaults minio root credentials
+ENV MINIO_ROOT_USER=minioadmin
+ENV MINIO_ROOT_PASSWORD=minioadmin
+ENV MINIO_BROWSER_LOGIN_ANIMATION=false
+
+RUN \
+    # Run upgrades & installs
+    apk update && apk --no-cache upgrade && \
+    apk add --no-cache ca-certificates tini && \
+    # Update certificates
+    update-ca-certificates && \
+    # Create oci user
+    adduser ${ALT_USER_NAME} -u ${ALT_USER_ID} -g ${ALT_USER_NAME} -D && \
+    echo "User ${ALT_USER_NAME} (id: ${ALT_USER_ID}) created" && \
+    mkdir -p /data && \
+    chown -R ${ALT_USER_ID}:${ALT_USER_ID} /data
+
+VOLUME ["/data"]
+
+# MinIO API and Console ports
+EXPOSE 9000
+EXPOSE 9001
+
+# Drop privileges
 USER ${ALT_USER_ID}
+
+# Start
+ENTRYPOINT ["/sbin/tini", "--", "/app/entrypoint.sh"]
