@@ -6,7 +6,9 @@ on:
       - main
 jobs:
   quality:
-    if: github.ref == 'refs/heads/main'
+    # Temporary disable quality CI run on main branch until SonarQube endpoint back again
+    if: false
+    # if: github.ref == 'refs/heads/main'
     name: quality
     runs-on: ubuntu-latest
     permissions: read-all
