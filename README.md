@@ -17,7 +17,6 @@ This repository contains a collection of [OCI Images](https://github.com/opencon
 
 ## Images Status
 
-
 | Service         | Image Name / Build Status                                                                                     | OS     | Description                                      |
 |-----------------|---------------------------------------------------------------------------------------------------------------|--------|--------------------------------------------------|
 | **FileBrowser** | [![oci-filebrowser-build](https://github.com/thomaschampagne/oci-images/actions/workflows/filebrowser.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/filebrowser.yaml) | Alpine | Web-based file manager.                         |
@@ -25,7 +24,6 @@ This repository contains a collection of [OCI Images](https://github.com/opencon
 | **Mosquitto**   | [![oci-mosquitto-build](https://github.com/thomaschampagne/oci-images/actions/workflows/mosquitto.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/mosquitto.yaml) | Alpine | MQTT broker for IoT.                            |
 | **Navidrome**   | [![oci-navidrome-build](https://github.com/thomaschampagne/oci-images/actions/workflows/navidrome.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/navidrome.yaml) | Alpine | Self-hosted music server.                       |
 | **MinIO**       | [![oci-minio-build](https://github.com/thomaschampagne/oci-images/actions/workflows/minio.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/minio.yaml) | Alpine | S3-compatible object storage.                   |
-| **PyDaV**       | [![oci-pydav-build](https://github.com/thomaschampagne/oci-images/actions/workflows/pydav.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/pydav.yaml) | Alpine | WebDAV server.                                  |
 | **Transmission**| [![oci-transmission-build](https://github.com/thomaschampagne/oci-images/actions/workflows/transmission.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/transmission.yaml) | Alpine | BitTorrent client.                             |
 | **Zigbee2MQTT** | [![oci-zigbee2mqtt-build](https://github.com/thomaschampagne/oci-images/actions/workflows/zigbee2mqtt.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/zigbee2mqtt.yaml) | Alpine | Zigbee to MQTT bridge.                         |
 | **Authelia**    | [![oci-authelia-build](https://github.com/thomaschampagne/oci-images/actions/workflows/authelia.yaml/badge.svg?branch=main)](https://github.com/thomaschampagne/oci-images/actions/workflows/authelia.yaml) | Ubuntu Chisel | Multi-factor authentication server.             |

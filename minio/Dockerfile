@@ -1,4 +1,4 @@
-ARG OCI_BASE_IMAGE=alpine:3.21
+ARG OCI_BASE_IMAGE=alpine:3.23
 ARG OCI_BASE_IMAGE_URL=https://hub.docker.com/_/alpine/
 ARG OCI_TITLE=oci-minio-image
 ARG OCI_DESCRIPTION="High-Performance Object Store"
@@ -10,7 +10,16 @@ FROM ${OCI_BASE_IMAGE} AS builder
 ARG TARGETOS=linux
 ARG TARGETARCH=amd64
 
-RUN apk add --no-cache ca-certificates wget && update-ca-certificates
+WORKDIR /build
+
+COPY ./entrypoint.sh ./entrypoint.sh
+
+RUN \
+    apk add --no-cache dos2unix ca-certificates wget && \
+    # Update CA for minio download
+    update-ca-certificates && \
+    # Ensure entrypoint well formatted
+    dos2unix ./entrypoint.sh
 
 # Download latest version
 # Resolve proper download directory per architecture
@@ -22,10 +31,10 @@ RUN set -eux; \
     ppc64le) ARCH_DIR="linux-ppc64le";; \
     *) echo "Unsupported TARGETARCH=${TARGETARCH}"; exit 1 ;; \
     esac; \
-    mkdir -p /out; \
-    wget -O /out/minio "https://dl.min.io/server/minio/release/${ARCH_DIR}/minio"; \
-    wget -O /out/mc    "https://dl.min.io/client/mc/release/${ARCH_DIR}/mc"; \
-    chmod +x /out/minio /out/mc
+    mkdir -p /build/out; \
+    wget -O /build/out/minio "https://dl.min.io/server/minio/release/${ARCH_DIR}/minio"; \
+    wget -O /build/out/mc    "https://dl.min.io/client/mc/release/${ARCH_DIR}/mc"; \
+    chmod +x /build/out/minio /build/out/mc
 
 ##### NO EDIT ZONE - START #####
 FROM ${OCI_BASE_IMAGE}
@@ -67,9 +76,9 @@ ARG ALT_USER_ID=1000
 
 WORKDIR /app
 
-COPY --from=builder /out/minio /usr/local/bin/minio
-COPY --from=builder /out/mc    /usr/local/bin/mc
-COPY ./entrypoint.sh ./entrypoint.sh
+COPY --from=builder /build/out/minio /usr/local/bin/minio
+COPY --from=builder /build/out/mc    /usr/local/bin/mc
+COPY --from=builder /build/entrypoint.sh ./entrypoint.sh
 
 # Define defaults minio root credentials
 ENV MINIO_ROOT_USER=minioadmin

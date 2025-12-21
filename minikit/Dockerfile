@@ -1,4 +1,4 @@
-ARG OCI_BASE_IMAGE=alpine:3.21
+ARG OCI_BASE_IMAGE=alpine:3.23
 ARG OCI_BASE_IMAGE_URL=https://hub.docker.com/_/alpine/
 ARG OCI_TITLE=oci-minikit-image
 ARG OCI_DESCRIPTION="A minimalist BusyBox-style image based on Alpine Linux"

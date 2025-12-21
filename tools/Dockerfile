@@ -1,4 +1,4 @@
-ARG OCI_BASE_IMAGE=alpine:3.21
+ARG OCI_BASE_IMAGE=alpine:3.23
 ARG OCI_BASE_IMAGE_URL=https://hub.docker.com/_/alpine/
 ARG OCI_TITLE=oci-tools-image
 ARG OCI_DESCRIPTION="Collection of handy tools for developers"
