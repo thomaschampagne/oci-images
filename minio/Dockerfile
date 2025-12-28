@@ -95,7 +95,8 @@ RUN \
     adduser ${ALT_USER_NAME} -u ${ALT_USER_ID} -g ${ALT_USER_NAME} -D && \
     echo "User ${ALT_USER_NAME} (id: ${ALT_USER_ID}) created" && \
     mkdir -p /data && \
-    chown -R ${ALT_USER_ID}:${ALT_USER_ID} /data
+    chown -R ${ALT_USER_ID}:${ALT_USER_ID} /app/entrypoint.sh /data && \
+    chmod +x /app/entrypoint.sh
 
 VOLUME ["/data"]
 

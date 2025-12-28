@@ -39,6 +39,7 @@ docker volume create oci-$APP_NAME-data 2> /dev/null
 # Run
 docker run -dit \
     --name $APP_NAME \
+    --user 1000:1000 \
     -p $PORT_1:$PORT_1 \
     -p $PORT_2:$PORT_2 \
     -v oci-$APP_NAME-data:/data \
