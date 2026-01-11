@@ -21,26 +21,26 @@ if [[ "$1" = "-c" || "$1" = "--clear" ]]; then
 fi
 
 # Kill existing container if exists
-docker rm -f $APP_NAME
+podman rm -f $APP_NAME
 
 # Clear if requested
 if [[ "$opt_clear" == "true" ]]; then
-    docker image rm $IMAGE
-    docker volume rm oci-$APP_NAME-data 2> /dev/null
+    podman image rm $IMAGE
+    podman volume rm oci-$APP_NAME-data 2> /dev/null
 fi
 
 # Build image
-docker build -t $IMAGE . && docker image prune -f
+podman build -t $IMAGE . && podman image prune -f
 
 # Create required volume
-docker volume create oci-$APP_NAME-data 2> /dev/null
+podman volume create oci-$APP_NAME-data 2> /dev/null
 
 # Run
-docker run -dit \
+podman run -dit \
     --name $APP_NAME \
     -p $PORT:$PORT \
     $IMAGE
 
 echo -e "\n[Info] Container running. Access app at: http://localhost:$PORT"
-echo -e "\n[Info] Connect to container with: docker exec -it $APP_NAME sh\n\n"
-docker logs -f $APP_NAME
+echo -e "\n[Info] Connect to container with: podman exec -it $APP_NAME sh\n\n"
+podman logs -f $APP_NAME

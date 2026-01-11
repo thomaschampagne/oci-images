@@ -3,8 +3,8 @@ cd "$(dirname "$0")" || exit
 
 sh prune-containers.sh
 
-docker volume ls -q | xargs docker volume rm -f 2> /dev/null
+podman volume ls -q | xargs podman volume rm -f 2> /dev/null
 echo "Volumes pruned"
 
-docker image ls -qa | xargs docker image rm -f 2> /dev/null
+podman image ls -qa | xargs podman image rm -f 2> /dev/null
 echo "Images pruned"
