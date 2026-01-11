@@ -13,8 +13,12 @@ WORKDIR /build
 RUN apk add --no-cache git && \
     # Install the latest version of pnpm globally
     npm install --ignore-scripts -g pnpm@latest && \
-    # Clone the it-tools repository from GitHub
-    git clone --depth 1 --branch main https://github.com/CorentinTh/it-tools.git . && \
+    # Get the latest tag name
+    LATEST_TAG=$(git ls-remote --tags --sort="v:refname" https://github.com/sharevb/it-tools.git | tail -n1 | sed 's|.*/\(.*\)|\1|; s/\^{}//') && \
+    # Display the version for logs
+    echo "Cloning version: ${LATEST_TAG}" && \
+    # Clone the specific tag
+    git clone --depth 1 --branch "${LATEST_TAG}" https://github.com/sharevb/it-tools.git . && \
     # Install project dependencies using pnpm
     pnpm install --ignore-scripts && \
     # Build the project for production

@@ -9,7 +9,7 @@
 
 # Variables
 NAME="tools"
-SRC_IMAGE="corentinth/it-tools:latest"
+SRC_IMAGE="ghcr.io/sharevb/it-tools:latest"
 LOCAL_DEST_FOLDER="./src/static"
 SRC_CONTAINER_PATH="/usr/share/nginx/html"
 
