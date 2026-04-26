@@ -1,4 +1,4 @@
-ARG OCI_BASE_IMAGE=pihole/pihole:2025.11.1
+ARG OCI_BASE_IMAGE=pihole/pihole:2026.04.1
 ARG OCI_BASE_IMAGE_URL=https://hub.docker.com/r/pihole/pihole
 ARG OCI_TITLE=oci-pihole-image
 ARG OCI_DESCRIPTION="Network-wide DNS ad blocker with DHCP server"
@@ -46,4 +46,3 @@ LABEL \
 
 # Run upgrades
 RUN apk update && apk --no-cache upgrade
-
