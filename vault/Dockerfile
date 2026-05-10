@@ -1,4 +1,4 @@
-ARG OCI_BASE_IMAGE=vaultwarden/server:1.35.8-alpine
+ARG OCI_BASE_IMAGE=vaultwarden/server:1.36.0-alpine
 ARG OCI_BASE_IMAGE_URL=https://hub.docker.com/r/vaultwarden/server
 ARG OCI_TITLE=oci-vault-image
 ARG OCI_DESCRIPTION="Unofficial Bitwarden compatible server"

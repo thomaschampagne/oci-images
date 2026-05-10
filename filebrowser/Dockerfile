@@ -1,4 +1,4 @@
-ARG OCI_BASE_IMAGE=filebrowser/filebrowser:v2.63.2
+ARG OCI_BASE_IMAGE=filebrowser/filebrowser:v2.63.3
 ARG OCI_BASE_IMAGE_URL=https://hub.docker.com/r/filebrowser/filebrowser
 ARG OCI_TITLE=oci-filebrowser-image
 ARG OCI_DESCRIPTION="Web-based File Manager"
