@@ -12,15 +12,8 @@ WORKDIR /build
 RUN apk add --no-cache git && \
     # Install the latest version of pnpm globally
     npm install --ignore-scripts -g pnpm@latest && \
-    # Define the target branch
-    TARGET_BRANCH="chore/all-my-stuffs" && \
-    # Check that the branch exists on remote, raise error if not
-    git ls-remote --heads https://github.com/sharevb/it-tools.git "${TARGET_BRANCH}" | grep -q "refs/heads/${TARGET_BRANCH}" || \
-        { echo "ERROR: Branch '${TARGET_BRANCH}' does not exist on remote repository."; exit 1; } && \
-    # Display the branch being cloned
-    echo "Cloning branch: ${TARGET_BRANCH}" && \
-    # Clone the specific branch
-    git clone --depth 1 --branch "${TARGET_BRANCH}" https://github.com/sharevb/it-tools.git . && \
+    # Clone the it-tools repository from GitHub
+    git clone --depth 1 --branch main https://github.com/CorentinTh/it-tools.git . && \
     # Install project dependencies using pnpm
     pnpm install --ignore-scripts && \
     # Build the project for production
