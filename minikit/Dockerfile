@@ -47,6 +47,7 @@ RUN \
     apk add --no-cache \
     gettext \
     openssl \
+    apache2-utils \
     curl \
     jq \
     yq && \
